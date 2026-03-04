@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1a1a2e">
+    <meta name="description" content="Mermaid Diagram Editor - UTM Code Editor">
+    <title>Mermaid UTM Editor</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>🧜‍♀️ Mermaid UTM Editor</h1>
+        <button id="installBtn" class="install-btn hidden">📥 Cài đặt App</button>
+    </header>
+
+    <main class="container">
+        <!-- Left Panel - Editor -->
+        <section class="panel editor-panel">
+            <div class="panel-header">
+                <h2>📝 Mã UTM / Mermaid</h2>
+                <div class="editor-actions">
+                    <button id="formatBtn" class="btn btn-secondary" title="Format code">
+                        🔧 Format
+                    </button>
+                    <button id="clearBtn" class="btn btn-secondary" title="Clear">
+                        🗑️ Xóa
+                    </button>
+                </div>
+            </div>
+            <textarea id="codeEditor" placeholder="Nhập mã Mermaid của bạn ở đây...
+
+Ví dụ:
+graph TD
+    A[Bắt đầu] --> B{Điều kiện}
+    B -->|Có| C[Hành động 1]
+    B -->|Không| D[Hành động 2]
+    C --> E[Kết thúc]
+    D --> E">graph TD
+    A[🚀 Campaign Start] --> B{UTM Source?}
+    B -->|Facebook| C[utm_source=facebook]
+    B -->|Google| D[utm_source=google]
+    B -->|Email| E[utm_source=email]
+    
+    C --> F{UTM Medium?}
+    D --> F
+    E --> F
+    
+    F -->|CPC| G[utm_medium=cpc]
+    F -->|Social| H[utm_medium=social]
+    F -->|Newsletter| I[utm_medium=newsletter]
+    
+    G --> J[📊 Analytics]
+    H --> J
+    I --> J
+    
+    J --> K[🎯 Campaign Name]
+    K --> L[utm_campaign=summer_sale_2024]
+    
+    L --> M{Success?}
+    M -->|✅ Yes| N[🏆 Convert]
+    M -->|❌ No| O[🔄 Retarget]</textarea>
+            <div class="examples">
+                <span>Mẫu:</span>
+                <button class="example-btn" data-example="flowchart">Flowchart</button>
+                <button class="example-btn" data-example="sequence">Sequence</button>
+                <button class="example-btn" data-example="class">Class</button>
+                <button class="example-btn" data-example="gantt">Gantt</button>
+                <button class="example-btn" data-example="pie">Pie</button>
+                <button class="example-btn" data-example="utm">UTM Flow</button>
+            </div>
+        </section>
+
+        <!-- Right Panel - Preview -->
+        <section class="panel preview-panel">
+            <div class="panel-header">
+                <h2>👁️ Xem trước</h2>
+                <div class="preview-actions">
+                    <button id="renderBtn" class="btn btn-primary" title="Render diagram">
+                        ▶️ Render
+                    </button>
+                    <button id="copyBtn" class="btn btn-success" title="Copy image to clipboard">
+                        📋 Copy ảnh
+                    </button>
+                    <button id="saveBtn" class="btn btn-success" title="Save as PNG">
+                        💾 Lưu PNG
+                    </button>
+                    <button id="saveSvgBtn" class="btn btn-success" title="Save as SVG">
+                        💾 Lưu SVG
+                    </button>
+                </div>
+            </div>
+            <div id="preview" class="preview-container">
+                <div id="mermaidOutput" class="mermaid-output"></div>
+            </div>
+            <div class="zoom-controls">
+                <button id="zoomOutBtn" class="zoom-btn">➖</button>
+                <span id="zoomLevel">100%</span>
+                <button id="zoomInBtn" class="zoom-btn">➕</button>
+                <button id="zoomResetBtn" class="zoom-btn">🔄</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Made with ❤️ using Mermaid.js | PWA Ready</p>
+    </footer>
+
+    <div id="toast" class="toast hidden"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
