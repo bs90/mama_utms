@@ -426,3 +426,47 @@ if ('serviceWorker' in navigator) {
             });
     });
 }
+
+// Modal Elements
+const promptBtn = document.getElementById('promptBtn');
+const promptModal = document.getElementById('promptModal');
+const closeModalBtn = document.getElementById('closeModalBtn');
+const modalOverlay = promptModal.querySelector('.modal-overlay');
+const copyPromptBtn = document.getElementById('copyPromptBtn');
+const promptTemplate = document.getElementById('promptTemplate');
+
+// Modal Functions
+function openModal() {
+    promptModal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+    promptModal.classList.add('hidden');
+    document.body.style.overflow = '';
+}
+
+async function copyPrompt() {
+    try {
+        await navigator.clipboard.writeText(promptTemplate.value);
+        showToast('📋 Đã copy prompt! Paste vào ChatGPT/Claude/Gemini');
+    } catch (error) {
+        // Fallback for older browsers
+        promptTemplate.select();
+        document.execCommand('copy');
+        showToast('📋 Đã copy prompt!');
+    }
+}
+
+// Modal Event Listeners
+promptBtn.addEventListener('click', openModal);
+closeModalBtn.addEventListener('click', closeModal);
+modalOverlay.addEventListener('click', closeModal);
+copyPromptBtn.addEventListener('click', copyPrompt);
+
+// Close modal on Escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !promptModal.classList.contains('hidden')) {
+        closeModal();
+    }
+});

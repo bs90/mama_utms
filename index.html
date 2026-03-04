@@ -13,7 +13,10 @@
 <body>
     <header>
         <h1>🧜‍♀️ Mermaid UTM Editor</h1>
-        <button id="installBtn" class="install-btn hidden">📥 Cài đặt App</button>
+        <div class="header-actions">
+            <button id="promptBtn" class="prompt-btn">🤖 Lấy Prompt cho AI</button>
+            <button id="installBtn" class="install-btn hidden">📥 Cài đặt App</button>
+        </div>
     </header>
 
     <main class="container">
@@ -109,6 +112,56 @@ graph TD
     </footer>
 
     <div id="toast" class="toast hidden"></div>
+
+    <!-- Prompt Modal -->
+    <div id="promptModal" class="modal hidden">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>🤖 Prompt Template cho AI</h2>
+                <button id="closeModalBtn" class="modal-close">✕</button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-tip">💡 Copy prompt này và gửi cho ChatGPT, Claude, Gemini... trước khi yêu cầu tạo UTM diagram</p>
+                <textarea id="promptTemplate" readonly>Tôi đang sử dụng Mermaid.js (version 10+) để tạo diagrams cho marketing UTM tracking.
+
+Hãy generate code Mermaid với các yêu cầu sau:
+
+**Định dạng output:**
+- Chỉ trả về code Mermaid thuần túy, không cần markdown code block
+- Sử dụng cú pháp Mermaid mới nhất (flowchart/graph TD, sequenceDiagram, pie, gantt, etc.)
+- Có thể dùng emoji để làm rõ ý nghĩa các node
+- Dùng tiếng Việt hoặc tiếng Anh tùy context
+
+**Cấu trúc UTM parameters chuẩn:**
+- utm_source: Nguồn traffic (google, facebook, email, newsletter...)
+- utm_medium: Loại kênh (cpc, social, email, banner, referral...)
+- utm_campaign: Tên chiến dịch
+- utm_term: Từ khóa (cho paid search)
+- utm_content: Phân biệt các phiên bản quảng cáo
+
+**Các loại diagram phù hợp:**
+1. flowchart/graph: Flow UTM tracking, customer journey
+2. sequenceDiagram: Tương tác user-server-analytics
+3. pie: Phân bổ traffic/budget theo source
+4. gantt: Timeline campaign
+5. mindmap: Cấu trúc UTM strategy
+
+**Ví dụ format mong muốn:**
+graph TD
+    A[🚀 Campaign] --> B{Source?}
+    B -->|Facebook| C[utm_source=facebook]
+    B -->|Google| D[utm_source=google]
+
+---
+
+Yêu cầu cụ thể của tôi: [MÔ TẢ YÊU CẦU Ở ĐÂY]</textarea>
+            </div>
+            <div class="modal-footer">
+                <button id="copyPromptBtn" class="btn btn-primary">📋 Copy Prompt</button>
+            </div>
+        </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
     <script src="app.js"></script>
