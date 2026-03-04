@@ -176,7 +176,29 @@ function getSvgElement() {
 // Convert SVG to PNG Canvas
 async function svgToCanvas(svg) {
     return new Promise((resolve, reject) => {
-        const svgData = new XMLSerializer().serializeToString(svg);
+        // Clone SVG to avoid modifying the original
+        const clonedSvg = svg.cloneNode(true);
+        
+        // Get actual dimensions from bounding box
+        const bbox = svg.getBBox();
+        const svgRect = svg.getBoundingClientRect();
+        
+        // Use viewBox or actual size
+        let width = parseFloat(clonedSvg.getAttribute('width')) || svgRect.width / (currentZoom || 1) || bbox.width + bbox.x * 2;
+        let height = parseFloat(clonedSvg.getAttribute('height')) || svgRect.height / (currentZoom || 1) || bbox.height + bbox.y * 2;
+        
+        // Ensure minimum size and add padding
+        width = Math.max(width, bbox.width + 40);
+        height = Math.max(height, bbox.height + 40);
+        
+        // Set explicit dimensions on cloned SVG
+        clonedSvg.setAttribute('width', width);
+        clonedSvg.setAttribute('height', height);
+        
+        // Remove any transform that might affect rendering
+        clonedSvg.style.transform = 'none';
+        
+        const svgData = new XMLSerializer().serializeToString(clonedSvg);
         const svgBlob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
         const url = URL.createObjectURL(svgBlob);
         
@@ -185,14 +207,14 @@ async function svgToCanvas(svg) {
             // Create canvas with 2x resolution for better quality
             const scale = 2;
             const canvas = document.createElement('canvas');
-            canvas.width = img.width * scale;
-            canvas.height = img.height * scale;
+            canvas.width = width * scale;
+            canvas.height = height * scale;
             
             const ctx = canvas.getContext('2d');
             ctx.fillStyle = '#ffffff';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
             ctx.scale(scale, scale);
-            ctx.drawImage(img, 0, 0);
+            ctx.drawImage(img, 0, 0, width, height);
             
             URL.revokeObjectURL(url);
             resolve(canvas);
