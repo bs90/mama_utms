@@ -96,7 +96,7 @@ const examples = {
     "Khác" : 5`,
 
     utm: `graph TD
-    A[🚀 Campaign Start] --> B{UTM Source?}
+    A[Campaign Start] --> B{UTM Source?}
     B -->|Facebook| C[utm_source=facebook]
     B -->|Google| D[utm_source=google]
     B -->|Email| E[utm_source=email]
@@ -109,16 +109,16 @@ const examples = {
     F -->|Social| H[utm_medium=social]
     F -->|Newsletter| I[utm_medium=newsletter]
     
-    G --> J[📊 Analytics]
+    G --> J[Analytics]
     H --> J
     I --> J
     
-    J --> K[🎯 Campaign Name]
+    J --> K[Campaign Name]
     K --> L[utm_campaign=summer_sale_2024]
     
     L --> M{Success?}
-    M -->|✅ Yes| N[🏆 Convert]
-    M -->|❌ No| O[🔄 Retarget]`
+    M -->|Yes| N[Convert]
+    M -->|No| O[Retarget]`
 };
 
 // Show toast notification
@@ -440,36 +440,42 @@ const chartSelect = document.getElementById('chartSelect');
 // Prompt Templates
 const promptTemplates = {
     vi: {
-        flowchart: `Tạo Mermaid flowchart cho UTM tracking. Chỉ trả code, không markdown.
+        flowchart: `Tôi dùng MermaidJS (https://mermaid.js.org) để vẽ diagram. Tạo flowchart cho UTM tracking.
+
+Chỉ trả code MermaidJS, không markdown block.
 
 Ví dụ:
 graph TD
-    A[🚀 Campaign] --> B{Source?}
+    A[Campaign Start] --> B{Source?}
     B -->|Facebook| C[utm_source=facebook]
     B -->|Google| D[utm_source=google]
-    C --> E[📊 Analytics]
+    C --> E[Analytics]
     D --> E
 
 Yêu cầu: [MÔ TẢ Ở ĐÂY]`,
 
-        sequence: `Tạo Mermaid sequence diagram cho UTM flow. Chỉ trả code, không markdown.
+        sequence: `Tôi dùng MermaidJS (https://mermaid.js.org) để vẽ diagram. Tạo sequence diagram cho UTM flow.
+
+Chỉ trả code MermaidJS, không markdown block.
 
 Ví dụ:
 sequenceDiagram
-    participant U as 👤 User
-    participant W as 🌐 Website
-    participant G as 📊 GA4
-    U->>W: Click quảng cáo (UTM params)
-    W->>G: Gửi tracking data
+    participant U as User
+    participant W as Website
+    participant G as GA4
+    U->>W: Click ad with UTM
+    W->>G: Send tracking
     G-->>W: Session ID
 
 Yêu cầu: [MÔ TẢ Ở ĐÂY]`,
 
-        pie: `Tạo Mermaid pie chart cho phân bổ UTM. Chỉ trả code, không markdown.
+        pie: `Tôi dùng MermaidJS (https://mermaid.js.org) để vẽ diagram. Tạo pie chart cho phân bổ UTM.
+
+Chỉ trả code MermaidJS, không markdown block.
 
 Ví dụ:
 pie showData
-    title Traffic theo Source
+    title Traffic by Source
     "Facebook" : 35
     "Google" : 40
     "Email" : 15
@@ -477,7 +483,9 @@ pie showData
 
 Yêu cầu: [MÔ TẢ Ở ĐÂY]`,
 
-        gantt: `Tạo Mermaid gantt chart cho campaign timeline. Chỉ trả code, không markdown.
+        gantt: `Tôi dùng MermaidJS (https://mermaid.js.org) để vẽ diagram. Tạo gantt chart cho campaign timeline.
+
+Chỉ trả code MermaidJS, không markdown block.
 
 Ví dụ:
 gantt
@@ -491,7 +499,9 @@ gantt
 
 Yêu cầu: [MÔ TẢ Ở ĐÂY]`,
 
-        mindmap: `Tạo Mermaid mindmap cho UTM strategy. Chỉ trả code, không markdown.
+        mindmap: `Tôi dùng MermaidJS (https://mermaid.js.org) để vẽ diagram. Tạo mindmap cho UTM strategy.
+
+Chỉ trả code MermaidJS, không markdown block.
 
 Ví dụ:
 mindmap
@@ -499,44 +509,47 @@ mindmap
         Source
             Facebook
             Google
-            Email
         Medium
             CPC
             Social
-            Newsletter
         Campaign
             Summer Sale
-            Black Friday
 
 Yêu cầu: [MÔ TẢ Ở ĐÂY]`
     },
     en: {
-        flowchart: `Create Mermaid flowchart for UTM tracking. Return code only, no markdown.
+        flowchart: `I use MermaidJS (https://mermaid.js.org) for diagrams. Create a flowchart for UTM tracking.
+
+Return MermaidJS code only, no markdown block.
 
 Example:
 graph TD
-    A[🚀 Campaign] --> B{Source?}
+    A[Campaign Start] --> B{Source?}
     B -->|Facebook| C[utm_source=facebook]
     B -->|Google| D[utm_source=google]
-    C --> E[📊 Analytics]
+    C --> E[Analytics]
     D --> E
 
 Request: [DESCRIBE HERE]`,
 
-        sequence: `Create Mermaid sequence diagram for UTM flow. Return code only, no markdown.
+        sequence: `I use MermaidJS (https://mermaid.js.org) for diagrams. Create a sequence diagram for UTM flow.
+
+Return MermaidJS code only, no markdown block.
 
 Example:
 sequenceDiagram
-    participant U as 👤 User
-    participant W as 🌐 Website
-    participant G as 📊 GA4
-    U->>W: Click ad (UTM params)
-    W->>G: Send tracking data
+    participant U as User
+    participant W as Website
+    participant G as GA4
+    U->>W: Click ad with UTM
+    W->>G: Send tracking
     G-->>W: Session ID
 
 Request: [DESCRIBE HERE]`,
 
-        pie: `Create Mermaid pie chart for UTM distribution. Return code only, no markdown.
+        pie: `I use MermaidJS (https://mermaid.js.org) for diagrams. Create a pie chart for UTM distribution.
+
+Return MermaidJS code only, no markdown block.
 
 Example:
 pie showData
@@ -548,7 +561,9 @@ pie showData
 
 Request: [DESCRIBE HERE]`,
 
-        gantt: `Create Mermaid gantt chart for campaign timeline. Return code only, no markdown.
+        gantt: `I use MermaidJS (https://mermaid.js.org) for diagrams. Create a gantt chart for campaign timeline.
+
+Return MermaidJS code only, no markdown block.
 
 Example:
 gantt
@@ -562,7 +577,9 @@ gantt
 
 Request: [DESCRIBE HERE]`,
 
-        mindmap: `Create Mermaid mindmap for UTM strategy. Return code only, no markdown.
+        mindmap: `I use MermaidJS (https://mermaid.js.org) for diagrams. Create a mindmap for UTM strategy.
+
+Return MermaidJS code only, no markdown block.
 
 Example:
 mindmap
@@ -570,16 +587,91 @@ mindmap
         Source
             Facebook
             Google
-            Email
         Medium
             CPC
             Social
-            Newsletter
         Campaign
             Summer Sale
-            Black Friday
 
 Request: [DESCRIBE HERE]`
+    },
+    ja: {
+        flowchart: `MermaidJS (https://mermaid.js.org) でダイアグラムを作成します。UTMトラッキング用のフローチャートを作成してください。
+
+MermaidJSコードのみ返してください。マークダウンブロックは不要です。
+
+例:
+graph TD
+    A[キャンペーン開始] --> B{ソース?}
+    B -->|Facebook| C[utm_source=facebook]
+    B -->|Google| D[utm_source=google]
+    C --> E[アナリティクス]
+    D --> E
+
+リクエスト: [ここに説明]`,
+
+        sequence: `MermaidJS (https://mermaid.js.org) でダイアグラムを作成します。UTMフロー用のシーケンス図を作成してください。
+
+MermaidJSコードのみ返してください。マークダウンブロックは不要です。
+
+例:
+sequenceDiagram
+    participant U as ユーザー
+    participant W as ウェブサイト
+    participant G as GA4
+    U->>W: UTM付き広告クリック
+    W->>G: トラッキング送信
+    G-->>W: セッションID
+
+リクエスト: [ここに説明]`,
+
+        pie: `MermaidJS (https://mermaid.js.org) でダイアグラムを作成します。UTM分布用の円グラフを作成してください。
+
+MermaidJSコードのみ返してください。マークダウンブロックは不要です。
+
+例:
+pie showData
+    title ソース別トラフィック
+    "Facebook" : 35
+    "Google" : 40
+    "Email" : 15
+    "Direct" : 10
+
+リクエスト: [ここに説明]`,
+
+        gantt: `MermaidJS (https://mermaid.js.org) でダイアグラムを作成します。キャンペーンタイムライン用のガントチャートを作成してください。
+
+MermaidJSコードのみ返してください。マークダウンブロックは不要です。
+
+例:
+gantt
+    title キャンペーンタイムライン
+    dateFormat YYYY-MM-DD
+    section Facebook
+    認知 :a1, 2024-01-01, 14d
+    コンバージョン :a2, after a1, 7d
+    section Google
+    検索広告 :b1, 2024-01-08, 21d
+
+リクエスト: [ここに説明]`,
+
+        mindmap: `MermaidJS (https://mermaid.js.org) でダイアグラムを作成します。UTM戦略用のマインドマップを作成してください。
+
+MermaidJSコードのみ返してください。マークダウンブロックは不要です。
+
+例:
+mindmap
+    root((UTM戦略))
+        ソース
+            Facebook
+            Google
+        メディア
+            CPC
+            Social
+        キャンペーン
+            サマーセール
+
+リクエスト: [ここに説明]`
     }
 };
 

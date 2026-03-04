@@ -8,14 +8,15 @@
     <title>Mermaid UTM Editor</title>
     <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" href="icons/icon-192.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <h1>🧜‍♀️ Mermaid UTM Editor</h1>
+        <h1><i class="fa-solid fa-diagram-project"></i> Mermaid UTM Editor</h1>
         <div class="header-actions">
-            <button id="promptBtn" class="prompt-btn">🤖 Lấy Prompt cho AI</button>
-            <button id="installBtn" class="install-btn hidden">📥 Cài đặt App</button>
+            <button id="promptBtn" class="prompt-btn"><i class="fa-solid fa-robot"></i> Prompt AI</button>
+            <button id="installBtn" class="install-btn hidden"><i class="fa-solid fa-download"></i> Install</button>
         </div>
     </header>
 
@@ -23,26 +24,26 @@
         <!-- Left Panel - Editor -->
         <section class="panel editor-panel">
             <div class="panel-header">
-                <h2>📝 Mã UTM / Mermaid</h2>
+                <h2><i class="fa-solid fa-code"></i> Code Editor</h2>
                 <div class="editor-actions">
                     <button id="formatBtn" class="btn btn-secondary" title="Format code">
-                        🔧 Format
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> Format
                     </button>
                     <button id="clearBtn" class="btn btn-secondary" title="Clear">
-                        🗑️ Xóa
+                        <i class="fa-solid fa-trash"></i> Clear
                     </button>
                 </div>
             </div>
-            <textarea id="codeEditor" placeholder="Nhập mã Mermaid của bạn ở đây...
+            <textarea id="codeEditor" placeholder="Enter MermaidJS code here...
 
-Ví dụ:
+Example:
 graph TD
-    A[Bắt đầu] --> B{Điều kiện}
-    B -->|Có| C[Hành động 1]
-    B -->|Không| D[Hành động 2]
-    C --> E[Kết thúc]
+    A[Start] --> B{Condition}
+    B -->|Yes| C[Action 1]
+    B -->|No| D[Action 2]
+    C --> E[End]
     D --> E">graph TD
-    A[🚀 Campaign Start] --> B{UTM Source?}
+    A[Campaign Start] --> B{UTM Source?}
     B -->|Facebook| C[utm_source=facebook]
     B -->|Google| D[utm_source=google]
     B -->|Email| E[utm_source=email]
@@ -55,16 +56,16 @@ graph TD
     F -->|Social| H[utm_medium=social]
     F -->|Newsletter| I[utm_medium=newsletter]
     
-    G --> J[📊 Analytics]
+    G --> J[Analytics]
     H --> J
     I --> J
     
-    J --> K[🎯 Campaign Name]
+    J --> K[Campaign Name]
     K --> L[utm_campaign=summer_sale_2024]
     
     L --> M{Success?}
-    M -->|✅ Yes| N[🏆 Convert]
-    M -->|❌ No| O[🔄 Retarget]</textarea>
+    M -->|Yes| N[Convert]
+    M -->|No| O[Retarget]</textarea>
             <div class="examples">
                 <span>Mẫu:</span>
                 <button class="example-btn" data-example="flowchart">Flowchart</button>
@@ -79,19 +80,19 @@ graph TD
         <!-- Right Panel - Preview -->
         <section class="panel preview-panel">
             <div class="panel-header">
-                <h2>👁️ Xem trước</h2>
+                <h2><i class="fa-solid fa-eye"></i> Preview</h2>
                 <div class="preview-actions">
                     <button id="renderBtn" class="btn btn-primary" title="Render diagram">
-                        ▶️ Render
+                        <i class="fa-solid fa-play"></i> Render
                     </button>
                     <button id="copyBtn" class="btn btn-success" title="Copy image to clipboard">
-                        📋 Copy ảnh
+                        <i class="fa-solid fa-copy"></i> Copy
                     </button>
                     <button id="saveBtn" class="btn btn-success" title="Save as PNG">
-                        💾 Lưu PNG
+                        <i class="fa-solid fa-image"></i> PNG
                     </button>
                     <button id="saveSvgBtn" class="btn btn-success" title="Save as SVG">
-                        💾 Lưu SVG
+                        <i class="fa-solid fa-vector-square"></i> SVG
                     </button>
                 </div>
             </div>
@@ -99,16 +100,16 @@ graph TD
                 <div id="mermaidOutput" class="mermaid-output"></div>
             </div>
             <div class="zoom-controls">
-                <button id="zoomOutBtn" class="zoom-btn">➖</button>
+                <button id="zoomOutBtn" class="zoom-btn"><i class="fa-solid fa-minus"></i></button>
                 <span id="zoomLevel">100%</span>
-                <button id="zoomInBtn" class="zoom-btn">➕</button>
-                <button id="zoomResetBtn" class="zoom-btn">🔄</button>
+                <button id="zoomInBtn" class="zoom-btn"><i class="fa-solid fa-plus"></i></button>
+                <button id="zoomResetBtn" class="zoom-btn"><i class="fa-solid fa-rotate"></i></button>
             </div>
         </section>
     </main>
 
     <footer>
-        <p>Made with ❤️ using Mermaid.js | PWA Ready</p>
+        <p>Made with <i class="fa-solid fa-heart" style="color: #ef4444;"></i> using Mermaid.js | PWA Ready</p>
     </footer>
 
     <div id="toast" class="toast hidden"></div>
@@ -118,20 +119,21 @@ graph TD
         <div class="modal-overlay"></div>
         <div class="modal-content">
             <div class="modal-header">
-                <h2>🤖 Prompt cho AI</h2>
-                <button id="closeModalBtn" class="modal-close">✕</button>
+                <h2><i class="fa-solid fa-robot"></i> AI Prompt Generator</h2>
+                <button id="closeModalBtn" class="modal-close"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <div class="modal-body">
                 <div class="prompt-options">
                     <div class="option-group">
-                        <label>🌐 Ngôn ngữ</label>
+                        <label><i class="fa-solid fa-globe"></i> Language</label>
                         <select id="langSelect">
                             <option value="vi">Tiếng Việt</option>
                             <option value="en">English</option>
+                            <option value="ja">日本語</option>
                         </select>
                     </div>
                     <div class="option-group">
-                        <label>📊 Loại Chart</label>
+                        <label><i class="fa-solid fa-chart-pie"></i> Chart Type</label>
                         <select id="chartSelect">
                             <option value="flowchart">Flowchart</option>
                             <option value="sequence">Sequence Diagram</option>
@@ -144,7 +146,7 @@ graph TD
                 <textarea id="promptTemplate" readonly></textarea>
             </div>
             <div class="modal-footer">
-                <button id="copyPromptBtn" class="btn btn-primary">📋 Copy Prompt</button>
+                <button id="copyPromptBtn" class="btn btn-primary"><i class="fa-solid fa-copy"></i> Copy Prompt</button>
             </div>
         </div>
     </div>
