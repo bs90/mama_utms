@@ -153,8 +153,8 @@ async function renderDiagram() {
         const { svg } = await mermaid.render(id, code);
         mermaidOutput.innerHTML = svg;
         
-        // Reset zoom on new diagram
-        currentZoom = 1;
+        // Set zoom to default 200%
+        currentZoom = 2;
         updateZoom();
         
         // Save to localStorage
