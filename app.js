@@ -35,7 +35,7 @@ const toast = document.getElementById('toast');
 const installBtn = document.getElementById('installBtn');
 
 // State
-let currentZoom = 1;
+let currentZoom = 2;
 let deferredPrompt = null;
 let diagramId = 0;
 
@@ -304,7 +304,7 @@ function zoomOut() {
 }
 
 function zoomReset() {
-    currentZoom = 1;
+    currentZoom = 2;
     updateZoom();
 }
 
