@@ -434,9 +434,165 @@ const closeModalBtn = document.getElementById('closeModalBtn');
 const modalOverlay = promptModal.querySelector('.modal-overlay');
 const copyPromptBtn = document.getElementById('copyPromptBtn');
 const promptTemplate = document.getElementById('promptTemplate');
+const langSelect = document.getElementById('langSelect');
+const chartSelect = document.getElementById('chartSelect');
+
+// Prompt Templates
+const promptTemplates = {
+    vi: {
+        flowchart: `Tạo Mermaid flowchart cho UTM tracking. Chỉ trả code, không markdown.
+
+Ví dụ:
+graph TD
+    A[🚀 Campaign] --> B{Source?}
+    B -->|Facebook| C[utm_source=facebook]
+    B -->|Google| D[utm_source=google]
+    C --> E[📊 Analytics]
+    D --> E
+
+Yêu cầu: [MÔ TẢ Ở ĐÂY]`,
+
+        sequence: `Tạo Mermaid sequence diagram cho UTM flow. Chỉ trả code, không markdown.
+
+Ví dụ:
+sequenceDiagram
+    participant U as 👤 User
+    participant W as 🌐 Website
+    participant G as 📊 GA4
+    U->>W: Click quảng cáo (UTM params)
+    W->>G: Gửi tracking data
+    G-->>W: Session ID
+
+Yêu cầu: [MÔ TẢ Ở ĐÂY]`,
+
+        pie: `Tạo Mermaid pie chart cho phân bổ UTM. Chỉ trả code, không markdown.
+
+Ví dụ:
+pie showData
+    title Traffic theo Source
+    "Facebook" : 35
+    "Google" : 40
+    "Email" : 15
+    "Direct" : 10
+
+Yêu cầu: [MÔ TẢ Ở ĐÂY]`,
+
+        gantt: `Tạo Mermaid gantt chart cho campaign timeline. Chỉ trả code, không markdown.
+
+Ví dụ:
+gantt
+    title Campaign Timeline
+    dateFormat YYYY-MM-DD
+    section Facebook
+    Awareness :a1, 2024-01-01, 14d
+    Conversion :a2, after a1, 7d
+    section Google
+    Search Ads :b1, 2024-01-08, 21d
+
+Yêu cầu: [MÔ TẢ Ở ĐÂY]`,
+
+        mindmap: `Tạo Mermaid mindmap cho UTM strategy. Chỉ trả code, không markdown.
+
+Ví dụ:
+mindmap
+    root((UTM Strategy))
+        Source
+            Facebook
+            Google
+            Email
+        Medium
+            CPC
+            Social
+            Newsletter
+        Campaign
+            Summer Sale
+            Black Friday
+
+Yêu cầu: [MÔ TẢ Ở ĐÂY]`
+    },
+    en: {
+        flowchart: `Create Mermaid flowchart for UTM tracking. Return code only, no markdown.
+
+Example:
+graph TD
+    A[🚀 Campaign] --> B{Source?}
+    B -->|Facebook| C[utm_source=facebook]
+    B -->|Google| D[utm_source=google]
+    C --> E[📊 Analytics]
+    D --> E
+
+Request: [DESCRIBE HERE]`,
+
+        sequence: `Create Mermaid sequence diagram for UTM flow. Return code only, no markdown.
+
+Example:
+sequenceDiagram
+    participant U as 👤 User
+    participant W as 🌐 Website
+    participant G as 📊 GA4
+    U->>W: Click ad (UTM params)
+    W->>G: Send tracking data
+    G-->>W: Session ID
+
+Request: [DESCRIBE HERE]`,
+
+        pie: `Create Mermaid pie chart for UTM distribution. Return code only, no markdown.
+
+Example:
+pie showData
+    title Traffic by Source
+    "Facebook" : 35
+    "Google" : 40
+    "Email" : 15
+    "Direct" : 10
+
+Request: [DESCRIBE HERE]`,
+
+        gantt: `Create Mermaid gantt chart for campaign timeline. Return code only, no markdown.
+
+Example:
+gantt
+    title Campaign Timeline
+    dateFormat YYYY-MM-DD
+    section Facebook
+    Awareness :a1, 2024-01-01, 14d
+    Conversion :a2, after a1, 7d
+    section Google
+    Search Ads :b1, 2024-01-08, 21d
+
+Request: [DESCRIBE HERE]`,
+
+        mindmap: `Create Mermaid mindmap for UTM strategy. Return code only, no markdown.
+
+Example:
+mindmap
+    root((UTM Strategy))
+        Source
+            Facebook
+            Google
+            Email
+        Medium
+            CPC
+            Social
+            Newsletter
+        Campaign
+            Summer Sale
+            Black Friday
+
+Request: [DESCRIBE HERE]`
+    }
+};
+
+// Update prompt based on selections
+function updatePrompt() {
+    const lang = langSelect.value;
+    const chart = chartSelect.value;
+    promptTemplate.value = promptTemplates[lang][chart];
+}
 
 // Modal Functions
 function openModal() {
+    updatePrompt();
     promptModal.classList.remove('hidden');
     document.body.style.overflow = 'hidden';
 }
@@ -449,12 +605,14 @@ function closeModal() {
 async function copyPrompt() {
     try {
         await navigator.clipboard.writeText(promptTemplate.value);
-        showToast('📋 Đã copy prompt! Paste vào ChatGPT/Claude/Gemini');
+        const msg = langSelect.value === 'vi' 
+            ? '📋 Đã copy prompt!' 
+            : '📋 Prompt copied!';
+        showToast(msg);
     } catch (error) {
-        // Fallback for older browsers
         promptTemplate.select();
         document.execCommand('copy');
-        showToast('📋 Đã copy prompt!');
+        showToast('📋 Copied!');
     }
 }
 
@@ -463,6 +621,8 @@ promptBtn.addEventListener('click', openModal);
 closeModalBtn.addEventListener('click', closeModal);
 modalOverlay.addEventListener('click', closeModal);
 copyPromptBtn.addEventListener('click', copyPrompt);
+langSelect.addEventListener('change', updatePrompt);
+chartSelect.addEventListener('change', updatePrompt);
 
 // Close modal on Escape key
 document.addEventListener('keydown', (e) => {
@@ -470,3 +630,4 @@ document.addEventListener('keydown', (e) => {
         closeModal();
     }
 });
+

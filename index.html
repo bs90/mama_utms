@@ -118,44 +118,30 @@ graph TD
         <div class="modal-overlay"></div>
         <div class="modal-content">
             <div class="modal-header">
-                <h2>🤖 Prompt Template cho AI</h2>
+                <h2>🤖 Prompt cho AI</h2>
                 <button id="closeModalBtn" class="modal-close">✕</button>
             </div>
             <div class="modal-body">
-                <p class="modal-tip">💡 Copy prompt này và gửi cho ChatGPT, Claude, Gemini... trước khi yêu cầu tạo UTM diagram</p>
-                <textarea id="promptTemplate" readonly>Tôi đang sử dụng Mermaid.js (version 10+) để tạo diagrams cho marketing UTM tracking.
-
-Hãy generate code Mermaid với các yêu cầu sau:
-
-**Định dạng output:**
-- Chỉ trả về code Mermaid thuần túy, không cần markdown code block
-- Sử dụng cú pháp Mermaid mới nhất (flowchart/graph TD, sequenceDiagram, pie, gantt, etc.)
-- Có thể dùng emoji để làm rõ ý nghĩa các node
-- Dùng tiếng Việt hoặc tiếng Anh tùy context
-
-**Cấu trúc UTM parameters chuẩn:**
-- utm_source: Nguồn traffic (google, facebook, email, newsletter...)
-- utm_medium: Loại kênh (cpc, social, email, banner, referral...)
-- utm_campaign: Tên chiến dịch
-- utm_term: Từ khóa (cho paid search)
-- utm_content: Phân biệt các phiên bản quảng cáo
-
-**Các loại diagram phù hợp:**
-1. flowchart/graph: Flow UTM tracking, customer journey
-2. sequenceDiagram: Tương tác user-server-analytics
-3. pie: Phân bổ traffic/budget theo source
-4. gantt: Timeline campaign
-5. mindmap: Cấu trúc UTM strategy
-
-**Ví dụ format mong muốn:**
-graph TD
-    A[🚀 Campaign] --> B{Source?}
-    B -->|Facebook| C[utm_source=facebook]
-    B -->|Google| D[utm_source=google]
-
----
-
-Yêu cầu cụ thể của tôi: [MÔ TẢ YÊU CẦU Ở ĐÂY]</textarea>
+                <div class="prompt-options">
+                    <div class="option-group">
+                        <label>🌐 Ngôn ngữ</label>
+                        <select id="langSelect">
+                            <option value="vi">Tiếng Việt</option>
+                            <option value="en">English</option>
+                        </select>
+                    </div>
+                    <div class="option-group">
+                        <label>📊 Loại Chart</label>
+                        <select id="chartSelect">
+                            <option value="flowchart">Flowchart</option>
+                            <option value="sequence">Sequence Diagram</option>
+                            <option value="pie">Pie Chart</option>
+                            <option value="gantt">Gantt Chart</option>
+                            <option value="mindmap">Mind Map</option>
+                        </select>
+                    </div>
+                </div>
+                <textarea id="promptTemplate" readonly></textarea>
             </div>
             <div class="modal-footer">
                 <button id="copyPromptBtn" class="btn btn-primary">📋 Copy Prompt</button>
